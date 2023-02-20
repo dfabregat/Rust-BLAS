@@ -1,0 +1,16 @@
+[package]
+name = "blas"
+version = "0.1.0"
+authors = ["Diego Fabregat Traver <d.fabregat@gmail.com>"]
+edition = "2021"
+rust-version = "1.67"
+description = "Rust BLAS reference implementation - Playground"
+documentation = "cargo doc --open"
+readme = "README.md"
+repository = "https://github.com/dfabregat/Rust-BLAS"
+license = "MIT OR Apache-2.0"
+keywords = ["linear algebra", "matrix computations", "BLAS"]
+categories = ["numerical linear algebra"]
+
+[dependencies]
+num-complex = "0.4"
