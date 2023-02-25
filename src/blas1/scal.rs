@@ -549,7 +549,7 @@ mod tests {
         let n = 4;
         let incx = 2;
         let offset = 1;
-        let expected_x = vec![C32_1_1, C32_0_4, C32_1_1, C32_0_4, 
+        let expected_x = vec![C32_1_1, C32_0_4, C32_1_1, C32_0_4,
                               C32_1_1, C32_0_4, C32_1_1, C32_0_4];
         cscal(n, alpha, &mut x[offset..], incx);
         assert_eq!(x, expected_x);
@@ -616,7 +616,7 @@ mod tests {
         let n = 4;
         let incx = 2;
         let offset = 1;
-        let expected_x = vec![C64_1_1, C64_0_4, C64_1_1, C64_0_4, 
+        let expected_x = vec![C64_1_1, C64_0_4, C64_1_1, C64_0_4,
                               C64_1_1, C64_0_4, C64_1_1, C64_0_4];
         zscal(n, alpha, &mut x[offset..], incx);
         assert_eq!(x, expected_x);
