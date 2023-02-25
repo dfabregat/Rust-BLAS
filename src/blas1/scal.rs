@@ -80,12 +80,208 @@ where T: 'a + std::ops::Mul<Output = T> + Copy {
 pub fn sscal(n: usize, alpha: f32, x: &mut [f32], incx: usize) {
     scal::<f32>(n, alpha, x, incx)
 }
+
+/// # Description
+///
+/// The function `dscal` scales `n` elements of a vector `x`
+/// by a constant `alpha`. Elements may separated by steps of
+/// `incx`.
+///
+/// This is the `f64` (double precision floating point) version.
+///
+/// # Arguments
+///
+/// - `n`: number of elements to scale
+/// - `alpha`: scaling factor
+/// - `x`: vector to scale
+/// - `incx`: step between consecutive elements to be scaled
+///
+/// # Examples
+///
+/// ```
+/// use blas::dscal;
+///
+/// fn main() {
+///     // Basic case
+///     let mut x = vec![1.0_f64; 8];
+///     let alpha = 2.0_f64;
+///     let n = 8;
+///     let incx = 1;
+///     let expected_x = vec![2.0_f64; 8];
+///
+///     dscal(n, alpha, &mut x, incx);
+///     assert_eq!(x, expected_x);
+///
+///     // With increment; notice the change in `n`
+///     let mut x = vec![1.0_f64; 8];
+///     let alpha = 2.0_f64;
+///     let n = 4;
+///     let incx = 2;
+///     let expected_x = vec![2.0_f64, 1.0, 2.0, 1.0, 2.0, 1.0, 2.0, 1.0];
+///
+///     dscal(n, alpha, &mut x, incx);
+///     assert_eq!(x, expected_x);
+///
+///     // With increment and an offset in the start of the vector
+///     let mut x = vec![1.0_f64; 8];
+///     let alpha = 2.0_f64;
+///     let n = 4;
+///     let incx = 2;
+///     let offset = 1;
+///     let expected_x = vec![1.0_f64, 2.0, 1.0, 2.0, 1.0, 2.0, 1.0, 2.0];
+///
+///     dscal(n, alpha, &mut x[offset..], incx);
+///     assert_eq!(x, expected_x);
+/// }
+/// ```
+/// # Panics
+///
+/// This function panics if:
+/// - `incx == 0`, or
+/// - `x.len() < (n - 1) * incx + 1`
+///
 pub fn dscal(n: usize, alpha: f64, x: &mut [f64], incx: usize) {
     scal::<f64>(n, alpha, x, incx)
 }
+
+/// # Description
+///
+/// The function `cscal` scales `n` elements of a vector `x`
+/// by a constant `alpha`. Elements may separated by steps of
+/// `incx`.
+///
+/// This is the `Complex32` (single precision complex) version.
+///
+/// # Arguments
+///
+/// - `n`: number of elements to scale
+/// - `alpha`: scaling factor
+/// - `x`: vector to scale
+/// - `incx`: step between consecutive elements to be scaled
+///
+/// # Examples
+///
+/// ```
+/// use blas::cscal;
+/// use num_complex::Complex32;
+///
+/// fn main() {
+///     const C32_1_1: Complex32 = Complex32::new(1.0, 1.0);
+///     const C32_2_2: Complex32 = Complex32::new(2.0, 2.0);
+///     // C32_0_4 = C32_1_1 * C32_2_2
+///     const C32_0_4: Complex32 = Complex32::new(0.0, 4.0);
+///
+///     // Basic case
+///     let mut x = vec![C32_1_1; 8];
+///     let alpha = C32_2_2;
+///     let n = 8;
+///     let incx = 1;
+///     let expected_x = vec![C32_0_4; 8];
+///
+///     cscal(n, alpha, &mut x, incx);
+///     assert_eq!(x, expected_x);
+///
+///     // With increment; notice the change in `n`
+///     let mut x = vec![C32_1_1; 8];
+///     let alpha = C32_2_2;
+///     let n = 4;
+///     let incx = 2;
+///     let expected_x = vec![C32_0_4, C32_1_1, C32_0_4, C32_1_1,
+///                           C32_0_4, C32_1_1, C32_0_4, C32_1_1];
+///
+///     cscal(n, alpha, &mut x, incx);
+///     assert_eq!(x, expected_x);
+///
+///     // With increment and an offset in the start of the vector
+///     let mut x = vec![C32_1_1; 8];
+///     let alpha = C32_2_2;
+///     let n = 4;
+///     let incx = 2;
+///     let offset = 1;
+///     let expected_x = vec![C32_1_1, C32_0_4, C32_1_1, C32_0_4,
+///                           C32_1_1, C32_0_4, C32_1_1, C32_0_4];
+///
+///     cscal(n, alpha, &mut x[offset..], incx);
+///     assert_eq!(x, expected_x);
+/// }
+/// ```
+/// # Panics
+///
+/// This function panics if:
+/// - `incx == 0`, or
+/// - `x.len() < (n - 1) * incx + 1`
+///
 pub fn cscal(n: usize, alpha: Complex32, x: &mut [Complex32], incx: usize) {
     scal::<Complex32>(n, alpha, x, incx)
 }
+
+/// # Description
+///
+/// The function `zscal` scales `n` elements of a vector `x`
+/// by a constant `alpha`. Elements may separated by steps of
+/// `incx`.
+///
+/// This is the `Complex32` (single precision complex) version.
+///
+/// # Arguments
+///
+/// - `n`: number of elements to scale
+/// - `alpha`: scaling factor
+/// - `x`: vector to scale
+/// - `incx`: step between consecutive elements to be scaled
+///
+/// # Examples
+///
+/// ```
+/// use blas::zscal;
+/// use num_complex::Complex64;
+///
+/// fn main() {
+///     const C64_1_1: Complex64 = Complex64::new(1.0, 1.0);
+///     const C64_2_2: Complex64 = Complex64::new(2.0, 2.0);
+///     // C64_0_4 = C64_1_1 * C64_2_2
+///     const C64_0_4: Complex64 = Complex64::new(0.0, 4.0);
+///
+///     // Basic case
+///     let mut x = vec![C64_1_1; 8];
+///     let alpha = C64_2_2;
+///     let n = 8;
+///     let incx = 1;
+///     let expected_x = vec![C64_0_4; 8];
+///
+///     zscal(n, alpha, &mut x, incx);
+///     assert_eq!(x, expected_x);
+///
+///     // With increment; notice the change in `n`
+///     let mut x = vec![C64_1_1; 8];
+///     let alpha = C64_2_2;
+///     let n = 4;
+///     let incx = 2;
+///     let expected_x = vec![C64_0_4, C64_1_1, C64_0_4, C64_1_1,
+///                           C64_0_4, C64_1_1, C64_0_4, C64_1_1];
+///
+///     zscal(n, alpha, &mut x, incx);
+///     assert_eq!(x, expected_x);
+///
+///     // With increment and an offset in the start of the vector
+///     let mut x = vec![C64_1_1; 8];
+///     let alpha = C64_2_2;
+///     let n = 4;
+///     let incx = 2;
+///     let offset = 1;
+///     let expected_x = vec![C64_1_1, C64_0_4, C64_1_1, C64_0_4,
+///                           C64_1_1, C64_0_4, C64_1_1, C64_0_4];
+///
+///     zscal(n, alpha, &mut x[offset..], incx);
+///     assert_eq!(x, expected_x);
+/// }
+/// ```
+/// # Panics
+///
+/// This function panics if:
+/// - `incx == 0`, or
+/// - `x.len() < (n - 1) * incx + 1`
+///
 pub fn zscal(n: usize, alpha: Complex64, x: &mut [Complex64], incx: usize) {
     scal::<Complex64>(n, alpha, x, incx)
 }
