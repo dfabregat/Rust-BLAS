@@ -391,7 +391,7 @@ mod tests {
         let alpha = 2;
         let n = 9;
         let incx = 1;
-        // would access x[9]
+        // would access x[8], off-by-one
         scal(n, alpha, &mut x, incx);
     }
 
@@ -402,7 +402,7 @@ mod tests {
         let alpha = 2;
         let n = 4;
         let incx = 3;
-        // would access x[10]
+        // would access x[9]
         scal(n, alpha, &mut x, incx);
     }
 
@@ -414,7 +414,7 @@ mod tests {
         let n = 4;
         let incx = 1;
         let offset = 5;
-        // would access x[8]
+        // would access x[8], off-by-one
         scal(n, alpha, &mut x[offset..], incx);
     }
 
